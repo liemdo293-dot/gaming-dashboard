@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, interactive-widget=overlays-content">
+<meta name="theme-color" content="#0B0D12">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Gaming-Dashboard: Uhr, Spotify, Wetter und Kalender fürs Tablet.">
+<title>Gaming Dashboard</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="layout-a">
+
+<!-- Icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect fill="currentColor" x="6" y="4" width="4" height="16" rx="1"/><rect fill="currentColor" x="14" y="4" width="4" height="16" rx="1"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 20 9 12l10-8v16z"/><path d="M5 19V5"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4l10 8-10 8V4z"/><path d="M19 5v14"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M11 16.5h2"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><circle cx="12" cy="14" r="3.5"/><path d="M12 6.5h.01"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M14 3v18"/><path d="M14 11h7"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+
+    <!-- Wetter -->
+    <symbol id="w-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+    <symbol id="w-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 13.5A8.5 8.5 0 1 1 10.5 3.5a6.6 6.6 0 0 0 10 10z"/></symbol>
+    <symbol id="w-cloud-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.95 12.5A4 4 0 0 0 8.1 11"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/></symbol>
+    <symbol id="w-cloud-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6z"/><path d="M10.1 9A6 6 0 0 1 16 4a4.24 4.24 0 0 0 6 6 6 6 0 0 1-3 5.02"/></symbol>
+    <symbol id="w-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H8a6 6 0 1 1 5.7-7.9h1.8a4 4 0 0 1 2 7.9z"/></symbol>
+    <symbol id="w-fog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A6 6 0 1 1 15.7 9h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M5 17h14"/><path d="M7 21h10"/></symbol>
+    <symbol id="w-drizzle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A6 6 0 1 1 15.7 9h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M8 19v1"/><path d="M8 14v1"/><path d="M16 19v1"/><path d="M16 14v1"/><path d="M12 21v1"/><path d="M12 16v1"/></symbol>
+    <symbol id="w-rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A6 6 0 1 1 15.7 9h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></symbol>
+    <symbol id="w-snow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A6 6 0 1 1 15.7 9h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M8 15h.01"/><path d="M8 19h.01"/><path d="M12 17h.01"/><path d="M12 21h.01"/><path d="M16 15h.01"/><path d="M16 19h.01"/></symbol>
+    <symbol id="w-storm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.3A6 6 0 1 1 15.7 10h1.8a4.5 4.5 0 0 1 .5 9"/><path d="m13 12-3 5h4l-3 5"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage">
+  <div id="board">
+
+    <!-- ===================== Ansicht A: Kacheln ===================== -->
+    <section class="view view-a" aria-label="Ansicht Kacheln">
+      <div class="col col-left">
+        <article class="card clock-card">
+          <div class="clock-top">
+            <div class="date" data-bind="date"></div>
+            <div class="chip-kw">KW <span data-bind="week"></span></div>
+          </div>
+          <div class="clock-big"><span class="hm" data-bind="hm">--:--</span><span class="ss" data-bind="ss"></span></div>
+        </article>
+
+        <article class="card player-card">
+          <button class="cover cover-lg" data-action="cover" aria-label="Abspielen oder pausieren">
+            <span class="cover-art"></span>
+            <span class="cover-empty"><svg><use href="#i-music"/></svg></span>
+            <span class="vinyl">
+              <span class="vinyl-bg"></span>
+              <span class="record"><span class="record-label"></span></span>
+              <span class="record-sheen"></span>
+              <svg class="tonearm" viewBox="0 0 100 100"><g class="arm"><circle cx="88" cy="12" r="6.5" class="arm-base"/><circle cx="88" cy="12" r="2.2" class="arm-pin"/><path d="M88 12 L67 68 L62 77" class="arm-rod"/><rect x="58.5" y="74.5" width="7" height="9" rx="1.2" transform="rotate(25 62 79)" class="arm-head"/></g></svg>
+            </span>
+          </button>
+
+          <div class="player-main">
+            <div class="player-head">
+              <div class="eyebrow"><span class="dot-spotify"></span><span data-bind="source">SPOTIFY</span></div>
+              <div class="track" data-bind="track"></div>
+              <div class="artist" data-bind="artist"></div>
+            </div>
+            <div class="progress-wrap">
+              <input type="range" class="range progress" data-range="progress" min="0" max="1000" value="0" aria-label="Position im Song">
+              <div class="times"><span data-bind="pos">–:––</span><span data-bind="dur">–:––</span></div>
+            </div>
+            <div class="controls">
+              <button class="ctl ctl-sm" data-action="shuffle" aria-label="Zufallswiedergabe"><svg><use href="#i-shuffle"/></svg></button>
+              <button class="ctl ctl-md" data-action="prev" aria-label="Vorheriger Titel"><svg><use href="#i-prev"/></svg></button>
+              <button class="ctl ctl-play" data-action="toggle" aria-label="Abspielen oder pausieren"><svg class="ico-play"><use href="#i-play"/></svg><svg class="ico-pause"><use href="#i-pause"/></svg></button>
+              <button class="ctl ctl-md" data-action="next" aria-label="Nächster Titel"><svg><use href="#i-next"/></svg></button>
+              <button class="ctl ctl-sm" data-action="repeat" aria-label="Wiederholen"><svg><use href="#i-repeat"/></svg><span class="repeat-one">1</span></button>
+            </div>
+            <div class="volume-row">
+              <svg class="vol-icon"><use href="#i-volume"/></svg>
+              <input type="range" class="range volume" data-range="volume" min="0" max="100" value="50" aria-label="Lautstärke">
+              <button class="device-chip" data-action="devices"><svg data-device-icon><use href="#i-monitor"/></svg><span data-bind="device">Gerät wählen</span></button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col col-right">
+        <article class="card weather-card">
+          <div class="card-head"><span>WETTER</span><span class="head-right" data-bind="place"></span></div>
+          <div class="weather-now">
+            <svg class="weather-icon" data-weather-icon><use href="#w-cloud-sun"/></svg>
+            <div>
+              <div class="temp" data-bind="temp">–°</div>
+              <div class="cond" data-bind="cond">Wetter wird geladen …</div>
+            </div>
+          </div>
+          <div class="forecast" data-list="forecast"></div>
+        </article>
+
+        <article class="card cal-card">
+          <div class="card-head"><span>KALENDER</span><span class="head-right" data-bind="month"></span></div>
+          <div class="week" data-list="week"></div>
+          <div class="events-label">Nächste Termine</div>
+          <div class="events" data-list="events"></div>
+        </article>
+
+        <article class="card status-card">
+          <div class="status-icon"><svg><use href="#i-tablet"/></svg></div>
+          <div class="status-text">
+            <span class="status-title" data-bind="statusTitle"></span>
+            <span class="status-sub" data-bind="statusSub"></span>
+          </div>
+          <button class="icon-btn" data-action="layout" aria-label="Ansicht wechseln"><svg><use href="#i-layout"/></svg></button>
+          <button class="icon-btn" data-action="settings" aria-label="Einstellungen"><svg><use href="#i-gear"/></svg></button>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== Ansicht B: Fokus-Uhr ===================== -->
+    <section class="view view-b" aria-label="Ansicht Fokus-Uhr">
+      <header class="b-top">
+        <div class="b-weather">
+          <svg class="weather-icon" data-weather-icon><use href="#w-cloud-sun"/></svg>
+          <div>
+            <div class="b-temp" data-bind="temp">–°</div>
+            <div class="b-cond"><span data-bind="condShort"></span><span class="b-sep"> · </span><span data-bind="place"></span></div>
+          </div>
+        </div>
+        <div class="b-tools">
+          <button class="icon-btn" data-action="layout" aria-label="Ansicht wechseln"><svg><use href="#i-layout"/></svg></button>
+          <button class="icon-btn" data-action="settings" aria-label="Einstellungen"><svg><use href="#i-gear"/></svg></button>
+        </div>
+        <div class="b-next">
+          <span class="eyebrow">NÄCHSTER TERMIN</span>
+          <span class="b-next-ev"><span class="b-next-time" data-bind="nextTime"></span><span data-bind="nextTitle"></span></span>
+        </div>
+      </header>
+
+      <div class="b-clock">
+        <div class="b-hm" data-bind="hm">--:--</div>
+        <div class="b-sub"><span data-bind="date"></span><span class="b-dot ss-part"></span><span class="b-ss ss-part"><span data-bind="ss"></span> s</span></div>
+      </div>
+
+      <article class="card b-player">
+        <button class="cover cover-sm" data-action="cover" aria-label="Abspielen oder pausieren">
+          <span class="cover-art"></span>
+          <span class="cover-empty"><svg><use href="#i-music"/></svg></span>
+          <span class="vinyl">
+            <span class="vinyl-bg"></span>
+            <span class="record"><span class="record-label"></span></span>
+            <span class="record-sheen"></span>
+          </span>
+        </button>
+        <div class="b-info">
+          <div class="b-titles"><span class="track" data-bind="track"></span><span class="artist" data-bind="artistShort"></span></div>
+          <div class="b-progress">
+            <span data-bind="pos">–:––</span>
+            <input type="range" class="range progress" data-range="progress" min="0" max="1000" value="0" aria-label="Position im Song">
+            <span data-bind="dur">–:––</span>
+          </div>
+        </div>
+        <div class="b-controls">
+          <button class="ctl ctl-md" data-action="prev" aria-label="Vorheriger Titel"><svg><use href="#i-prev"/></svg></button>
+          <button class="ctl ctl-play ctl-play-sm" data-action="toggle" aria-label="Abspielen oder pausieren"><svg class="ico-play"><use href="#i-play"/></svg><svg class="ico-pause"><use href="#i-pause"/></svg></button>
+          <button class="ctl ctl-md" data-action="next" aria-label="Nächster Titel"><svg><use href="#i-next"/></svg></button>
+          <div class="b-vol">
+            <svg class="vol-icon"><use href="#i-volume"/></svg>
+            <input type="range" class="range volume" data-range="volume" min="0" max="100" value="50" aria-label="Lautstärke">
+          </div>
+          <button class="icon-btn" data-action="devices" aria-label="Gerät wählen"><svg data-device-icon><use href="#i-monitor"/></svg></button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===================== Einstellungen ===================== -->
+    <div class="overlay" id="settings" hidden>
+      <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="set-title">
+        <nav class="sheet-nav">
+          <h2 id="set-title">Einstellungen</h2>
+          <button class="tab is-active" data-tab="look">Ansicht</button>
+          <button class="tab" data-tab="spotify">Spotify</button>
+          <button class="tab" data-tab="weather">Wetter</button>
+          <button class="tab" data-tab="calendar">Kalender</button>
+          <button class="tab" data-tab="sync">Sync mit PC</button>
+          <span class="nav-spacer"></span>
+          <span class="version">Version <span data-bind="version"></span></span>
+        </nav>
+
+        <div class="sheet-body">
+          <button class="icon-btn close" data-close aria-label="Schließen"><svg><use href="#i-close"/></svg></button>
+
+          <section class="pane" data-pane="look">
+            <p class="welcome" id="welcome" hidden>Willkommen! Hier stellst du alles ein. Für Spotify und Kalender gibt es je einen Reiter links, die Anleitung liegt bei.</p>
+            <h3>Layout</h3>
+            <div class="layout-pick">
+              <button class="layout-opt" data-set-layout="a">
+                <span class="mini mini-a"><span></span><span></span><span></span><span></span><span></span></span>
+                <span class="layout-name">Kacheln</span>
+              </button>
+              <button class="layout-opt" data-set-layout="b">
+                <span class="mini mini-b"><span></span><span></span></span>
+                <span class="layout-name">Fokus-Uhr</span>
+              </button>
+            </div>
+            <p class="hint">Tipp: Auf dem Dashboard nach links oder rechts wischen wechselt ebenfalls.</p>
+
+            <h3>Akzentfarbe</h3>
+            <div class="swatches">
+              <button class="swatch" data-accent="#FFB23E" style="--sw:#FFB23E" aria-label="Amber"></button>
+              <button class="swatch" data-accent="#5AC8FA" style="--sw:#5AC8FA" aria-label="Blau"></button>
+              <button class="swatch" data-accent="#B8F35A" style="--sw:#B8F35A" aria-label="Lime"></button>
+              <button class="swatch" data-accent="#FF7A9A" style="--sw:#FF7A9A" aria-label="Pink"></button>
+              <label class="swatch swatch-custom" aria-label="Eigene Farbe"><input type="color" id="accent-custom"><span>+</span></label>
+            </div>
+
+            <h3>Cover-Stil</h3>
+            <div class="seg">
+              <button data-cover="cover">Albumcover</button>
+              <button data-cover="vinyl">Plattenspieler</button>
+            </div>
+
+            <h3>Optionen</h3>
+            <label class="switch-row"><span>Sekunden anzeigen</span><input type="checkbox" data-toggle="showSeconds"><span class="switch"></span></label>
+            <label class="switch-row"><span>Bildschirm nicht ausschalten</span><input type="checkbox" data-toggle="keepAwake"><span class="switch"></span></label>
+            <label class="switch-row"><span>Hintergrund-Licht passend zum Cover</span><input type="checkbox" data-toggle="ambient"><span class="switch"></span></label>
+          </section>
+
+          <section class="pane" data-pane="spotify" hidden>
+            <div class="status-line" data-bind="spStatus"></div>
+            <h3>1 · Client-ID</h3>
+            <p class="hint">Aus deiner Spotify-Developer-App (Anleitung, Schritt 3).</p>
+            <input class="field mono" id="sp-client" placeholder="32 Zeichen, z. B. 3f2a9c…" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <h3>2 · Redirect-URI</h3>
+            <p class="hint">Genau so in der Spotify-App unter „Redirect URIs“ eintragen.</p>
+            <div class="copy-row"><code id="sp-redirect"></code><button class="btn" data-copy="sp-redirect">Kopieren</button></div>
+            <h3>3 · Verbinden</h3>
+            <div class="btn-row">
+              <button class="btn btn-accent" id="sp-login">Mit Spotify verbinden</button>
+              <button class="btn" id="sp-logout">Trennen</button>
+            </div>
+          </section>
+
+          <section class="pane" data-pane="weather" hidden>
+            <h3>Standort</h3>
+            <div class="seg">
+              <button data-locmode="auto">Automatisch (GPS)</button>
+              <button data-locmode="manual">Ort wählen</button>
+            </div>
+            <p class="loc-current"><svg><use href="#i-pin"/></svg><span data-bind="placeFull">Noch kein Ort</span></p>
+            <div class="manual-only">
+              <div class="search-row">
+                <input class="field" id="loc-q" placeholder="Stadt eingeben" autocomplete="off">
+                <button class="btn" id="loc-search">Suchen</button>
+              </div>
+              <div class="results" id="loc-results"></div>
+            </div>
+            <p class="hint">Wetterdaten von Open-Meteo, ohne Anmeldung.</p>
+          </section>
+
+          <section class="pane" data-pane="calendar" hidden>
+            <h3>Kalender-Link</h3>
+            <p class="hint">Am besten der Link aus deinem Google-Apps-Script (Anleitung, Schritt 5). Ein direkter iCal-Link klappt nur, wenn der Anbieter das zulässt.</p>
+            <input class="field mono" id="cal-url" placeholder="https://script.google.com/macros/s/…/exec?token=…" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <details class="adv">
+              <summary>Erweitert: CORS-Proxy für direkte iCal-Links</summary>
+              <input class="field mono" id="cal-proxy" placeholder="z. B. https://dein-proxy.example/?url=" autocomplete="off" autocapitalize="off" spellcheck="false">
+            </details>
+            <div class="btn-row"><button class="btn btn-accent" id="cal-test">Speichern und testen</button></div>
+            <div class="status-line" id="cal-status"></div>
+          </section>
+
+          <section class="pane" data-pane="sync" hidden>
+            <h3>Einstellungen aufs Tablet holen</h3>
+            <p class="hint">Richte alles bequem am PC ein, dann scannst du diesen Code mit der Kamera vom Tablet. Den Spotify-Login machst du auf jedem Gerät einmal selbst.</p>
+            <div class="sync-grid">
+              <div class="qr" id="qr"></div>
+              <div class="sync-side">
+                <button class="btn" id="sync-copy">Link kopieren</button>
+                <p class="hint" id="sync-info"></p>
+              </div>
+            </div>
+            <h3>Zurücksetzen</h3>
+            <button class="btn btn-danger" id="reset">Alle Einstellungen löschen</button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- Geräteauswahl -->
+    <div class="overlay" id="devices" hidden>
+      <div class="sheet sheet-small" role="dialog" aria-modal="true" aria-labelledby="dev-title">
+        <div class="small-head"><h2 id="dev-title">Abspielen auf …</h2><button class="icon-btn" data-close aria-label="Schließen"><svg><use href="#i-close"/></svg></button></div>
+        <div class="device-list" id="device-list"></div>
+        <p class="hint">Ist dein PC nicht dabei? Öffne Spotify auf dem PC und spiel kurz etwas ab.</p>
+      </div>
+    </div>
+
+    <!-- Import vom PC -->
+    <div class="overlay" id="import" hidden>
+      <div class="sheet sheet-small" role="dialog" aria-modal="true" aria-labelledby="imp-title">
+        <div class="small-head"><h2 id="imp-title">Einstellungen übernehmen?</h2></div>
+        <p class="hint" id="import-summary"></p>
+        <div class="btn-row"><button class="btn btn-accent" id="import-yes">Übernehmen</button><button class="btn" data-close>Abbrechen</button></div>
+      </div>
+    </div>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
